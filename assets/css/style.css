@@ -1,0 +1,30 @@
+ 
+body {
+	background-color: black;
+}
+
+ .container { 
+ background-color: black;
+
+}
+
+ h1 {
+ 	font-weight: 800;
+ 	font-size: 50px;
+ 	text-align: center;
+ 	color: white;
+ }
+
+.jumbotron{
+background: url('../images/giphy 2.gif');
+
+}
+
+.container {
+	align-content: center;
+}
+
+}
+ .buttons {
+ 	background-color: #555555;
+ }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Giftastic</title>
+
+   <link rel="stylesheet" href="assets/css/style.css">
+
+   <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+<div class="container">
+
+  
+      <div class="jumbotron">
+
+      <h1 style="color:white;">Cartoon's Search</h1>
+
+      </div>
+
+      <!-- form for search and submit button
+      this funtionality is not completed since i wasnt sure if i needed to add more buttons and new search to the array. The idea was to add new search and create a new button with the search to display new giphy series.  could not foind in the API docuemntstion how to make it still without linkinf a specific gif:)-->
+
+      <form id="cartoonSearch">
+         <label for="search-giphy-input" Style="font-size: 22px; color: white;">Search Giphy</label><br></form>
+         <input type="text" id="search-giphy-input">
+          <input id="search-giphy" type="submit" value="Giphy Search">
+         <br><br>
+
+      <!-- buttons for types of cartoons -->
+        <button data-cartoons="minions" style="background-color: #555555; border-radius: 12px; font-size: 20px; color: white;">Minions</button>
+
+        <button data-cartoons="the simpsons"style="background-color: #555555; border-radius: 12px; font-size: 18px; color: white;">The Simpsons</button>
+
+        <button data-cartoons="family guy"style="background-color: #555555; border-radius: 12px; font-size: 18px; color: white;">Family Guy</button>
+
+
+        <button data-cartoons="sponge bob"style="background-color: #555555; border-radius: 12px; font-size: 18px; color: white;">Sponsge Bob</button>
+        <br>
+
+        <button data-cartoons="wall-e"style="background-color: #555555; border-radius: 12px; font-size: 18px; color: white;">Wall-e</button>
+
+        <button data-cartoons="the jetsons"style="background-color: #555555; border-radius: 12px; font-size: 18px; color: white;">The Jetsons</button><br>
+        <br>
+        <div id="gifs-appear-here">
+        </div>
+
+   
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+ // Adding click event listen listener to all buttons
+
+    $("button").on("click", function() {
+      // Grabbing and storing the data-cartoons-comic property value from the button
+      var cartoons = $(this).attr("data-cartoons");
+
+      // Constructing a queryURL using category name cartoons- 
+      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + cartoons + "&api_key=145ccdf9ab2947d08825ed78c786601e";
+
+      // Performing an AJAX request with the queryURL
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+        // After data comes back from the request
+        .done(function(response) {
+          console.log(queryURL);
+
+          console.log(response);
+          // storing the data from the AJAX request in the results variable
+          var results = response.data;
+
+          // Looping through each result item
+          for (var i = 0; i < results.length; i++) {
+
+            // Creating and storing a div tag
+            var cartoonsDiv = $("<div>");
+
+            var p = $("<p>").text("Rating: " + results[i].rating);
+
+
+            // Creating and storing an image tag
+
+            var cartoonsImage = $("<img>");
+            // Setting the src attribute of the image to a property pulled off the result item
+            cartoonsImage.attr("src", results[i].images.fixed_height.url);
+
+            // Appending the paragraph and image tag to the cartoons-comicDiv
+
+           cartoonsDiv.prepend(p);
+           cartoonsDiv.prepend(cartoonsImage);
+
+            // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
+            $("#gifs-appear-here").prepend(cartoonsDiv);
+          }
+        });
+    });
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+    
+   
